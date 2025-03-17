@@ -1,0 +1,49 @@
+﻿<fluent:RibbonWindow x:Class="RibbonToggleButtonsShowcase.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                     xmlns:fluent="urn:fluent-ribbon"
+                     xmlns:local="clr-namespace:RibbonToggleButtonsShowcase"
+                     Title="Toggle Buttons Showcase"
+                     Width="640"
+                     Height="320">
+    
+    <fluent:RibbonWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>                
+                <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ObjectDataProvider x:Key="Options" MethodName="GetValues" ObjectType="sys:Enum">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="local:Options"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </ResourceDictionary>
+    </fluent:RibbonWindow.Resources>
+    
+    <DockPanel LastChildFill="False">
+
+        <fluent:Ribbon DockPanel.Dock="Top"
+                       CanMinimize="False"
+                       AreTabHeadersVisible="False"
+                       IsQuickAccessToolBarMenuDropDownVisible="False">
+            <fluent:RibbonTabItem>
+                <fluent:RibbonGroupBox>
+                    <ItemsControl ItemsSource="{Binding Source={StaticResource Options}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Rows="1" IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="local:Options">
+                                <fluent:ToggleButton Header="{Binding}" GroupName="Options"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon>
+    </DockPanel>
+    
+</fluent:RibbonWindow>

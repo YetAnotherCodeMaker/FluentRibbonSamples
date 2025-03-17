@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <FluentRibbonVersion Condition=" '$(FluentRibbonVersion)' == '' ">11</FluentRibbonVersion>
+    <BaseOutputPath>bin\fluent$(FluentRibbonVersion)</BaseOutputPath>
+    <DefaultItemExcludes>bin\**</DefaultItemExcludes>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RibbonToggleButtonsShowcase</RootNamespace>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(FluentRibbonVersion)' == '10' ">
+    <PackageReference Include="Fluent.Ribbon" Version="10.1.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(FluentRibbonVersion)' == '11' ">
+    <PackageReference Include="Fluent.Ribbon" Version="11.0.0" />
+  </ItemGroup>
+
+</Project>
