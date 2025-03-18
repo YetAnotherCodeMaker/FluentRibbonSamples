@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <FluentRibbonVersion Condition=" '$(FluentRibbonVersion)' == '' ">11</FluentRibbonVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseOutputPath>bin\fluent$(FluentRibbonVersion)</BaseOutputPath>
+    <DefaultItemExcludes>bin\**</DefaultItemExcludes>
+    <DefineConstants Condition=" '$(FluentRibbonVersion)' != '0' ">$(DefinedConstants);USE_FLUENT_RIBBON</DefineConstants>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RibbonWindowMenuShowcase</RootNamespace>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(FluentRibbonVersion)' == '0' ">
+    <!-- empty -->
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(FluentRibbonVersion)' == '10' ">
+    <PackageReference Include="Fluent.Ribbon" Version="10.1.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(FluentRibbonVersion)' == '11' ">
+    <PackageReference Include="Fluent.Ribbon" Version="11.0.0" />
+  </ItemGroup>
+
+  <Target Name="DisplayVersion" AfterTargets="BeforeBuild">
+    <Message Condition=" '$(FluentRibbonVersion)' == '0' " Importance="high" Text="Not using Fluent Ribbon" />
+    <Message Condition=" '$(FluentRibbonVersion)' != '0' " Importance="high" Text="Fluent Ribbon Version: $(FluentRibbonVersion)" />
+  </Target>
+  
+</Project>
